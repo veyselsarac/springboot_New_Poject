@@ -84,4 +84,40 @@ public class StudentService {
         return studentRepository.findAll(pageable);
 
     }
+
+    public List<Student> findStudentsByLastName(String lastName) {
+
+    return studentRepository.findByLastName(lastName);
+    }
+
+    public List<Student> findStudentByGrade(int grade) {
+
+        return studentRepository.findByGradeWithJPQL(grade);
+    }
+
+    public StudentDTO getStudentDTOById(Long id) {
+
+        // First Way:
+    /*
+    Student student = getStudentById(id);
+    StudentDTO studentDTO = new StudentDTO();
+    studentDTO.setFirstName(student.getName());
+    studentDTO.setLastName(student.getLastName());
+    studentDTO.setGrade(student.getGrade());
+    studentDTO.setPhoneNumber(student.getPhoneNumber());
+    studentDTO.setEmail(student.getEmail());
+    studentDTO.setId(0L);
+     */
+
+        // Second Way:
+        // Student student = getStudentById(id);
+        //StudentDTO studentDTO = new StudentDTO(student);
+
+        // Third Way:
+        StudentDTO studentDTO = studentRepository.findStudentDTOById(id).orElseThrow(()-> new ResourceNotFoundException("Couldn't find the student with id: "+id));
+
+        return studentDTO;
+
+
+    }
 }

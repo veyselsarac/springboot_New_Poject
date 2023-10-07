@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController // To create rest QPI and tell Spring that we are using JSON bodies
+@RestController // To create rest API and tell Spring that we are using JSON bodies
 @RequestMapping("/students") // http://localhost:8080/students
 public class StudentController {
 
@@ -115,6 +115,37 @@ public class StudentController {
 
         return ResponseEntity.ok(pageOfStudents);
     }
+
+    // Getting Students by their last name.
+    @GetMapping("/search") // http://localhost:8080/students/search?lastname=A
+    public ResponseEntity<List<Student>> getStudentsByLastName(@RequestParam("lastname") String lastName){
+
+        List<Student> students = studentService.findStudentsByLastName(lastName);
+
+        return ResponseEntity.ok(students);
+
+    }
+
+    // Get Students by their grade
+    @GetMapping("/search/{grade}")  // http://localhost:8080/students/search/90
+    public ResponseEntity<List<Student>> getStudentsByGrade(@PathVariable int grade){
+        List<Student> students = studentService.findStudentByGrade(grade);
+
+        return ResponseEntity.ok(students);
+
+    }
+
+    // Get StudentDTO by id
+    // Get StudentDTO by id
+    @GetMapping("/queryId") // http://localhost:8080/students/queryId?id=2
+    public ResponseEntity<StudentDTO> getStudentDTOById(@RequestParam("id") Long id){
+
+        StudentDTO studentDTO = studentService.getStudentDTOById(id);
+
+        return ResponseEntity.ok(studentDTO);
+
+    }
+
 
 
 }
