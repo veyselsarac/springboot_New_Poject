@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -39,7 +41,12 @@ public class Student {
 
     private String phoneNumber;
 
+    @Setter(AccessLevel.NONE)
     private LocalDateTime creationDate = LocalDateTime.now();
+
+
+    @OneToMany(mappedBy = "student")
+    private List<Book> books = new ArrayList<>();
 
 
 

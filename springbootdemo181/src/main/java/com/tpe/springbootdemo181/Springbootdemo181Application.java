@@ -1,5 +1,6 @@
 package com.tpe.springbootdemo181;
 
+import com.tpe.springbootdemo181.domain.Book;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,6 +11,7 @@ public class Springbootdemo181Application {
 	public static void main(String[] args) {
 
 		System.out.println("Hi.");
+
 
 		SpringApplication.run(Springbootdemo181Application.class, args);
 	}
