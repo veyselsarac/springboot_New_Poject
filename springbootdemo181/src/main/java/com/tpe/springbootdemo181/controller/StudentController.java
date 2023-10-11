@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,8 @@ public class StudentController {
     private StudentService studentService;
 
     Logger logger = LoggerFactory.getLogger(StudentController.class);
+
+    @PreAuthorize("hasRole('ADMIN')")  // it will add ROLE_ by itself  // ROLE_ADMINt
 
     // Get all students
     @GetMapping     // http://localhost:8080/students + GET
